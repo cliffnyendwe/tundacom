@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>TUNDACOM | HOME</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: eBusiness - v4.3.0
+  * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <h1><a href="/">TUNDACOM</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="{% url 'about' %}">Swap Houses</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'services' %}">Hotels</a></li>
+{% if user.is_authenticated %}
+          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% if user.is_superuser %}
+              <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+
+              {% else %}
+              <li><a href="#">Profile</a></li>
+               <li><a href="{% url 'dashboard' %}">Profile</a></li>
+              {% endif %}
+              <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+
+{% else %}
+          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'login' %}">Login</a></li>
+              <li><a href="{% url 'register' %}">Register</a></li>
+
+            </ul>
+          </li>
+{% endif %}
+          <li><a class="nav-link scrollto" href="{% url 'about' %}">About</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+
+  <main id="main">
+
+<br>
+<br>
+
+<!-- ======= Blog Section ======= -->
+    <div id="blog" class="blog-area">
+      <div class="blog-inner area-padding">
+        <div class="blog-overly"></div>
+        <div class="container ">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="section-headline text-center">
+
+                <a href="{% url 'rooms' %}">
+                <h2>Hotel Rooms</h2>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Start Left Blog -->
+
+{% for room in object_list %}
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <a href="{% url 'hotel-list' %}">
+                    <img src="{% static 'assets/images/room1.jpg' %}" alt="">
+                  </a>
+                </div>
+                <div class="blog-meta">
+                  <span class="comments-type">
+                    <i class="fa fa-comment-o"></i>
+                    <a href="#">13 Reviews</a>
+                  </span>
+                </div>
+                <div class="blog-text">
+                  <h4>
+                    <a href="{% url 'hotel-list' %}">{{room.hotel}}, {{room.hotel.location}}</a>
+                  </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
+                    <br>
+                     <span>
+                      <a href="{% url 'book-room' %}" class="btn btn-info mt-2">View Details</a>
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <!-- Start single blog -->
+            </div>
+{% endfor %}
+
+
+            <!-- End Left Blog-->
+            <!-- Start Left Blog -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <a href="{% url 'hotel-list' %}">
+                    <img src="{% static 'assets/images/room2.jpg' %}" alt="">
+                  </a>
+                </div>
+                <div class="blog-meta">
+                  <span class="comments-type">
+                    <i class="fa fa-comment-o"></i>
+                    <a href="#">130 Reviews</a>
+                  </span>
+                </div>
+                <div class="blog-text">
+                 <h4>
+                    <a href="{% url 'hotel-list' %}">Madaraka Hotel, Kisumu!</a>
+                  </h4>
+                     <span>
+                      <a href="{% url 'book-room' %}" class="btn btn-info mt-2">View Details</a>
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <!-- Start single blog -->
+            </div>
+            <!-- End Left Blog-->
+            <!-- Start Right Blog-->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <a href="{% url 'hotel-list' %}">
+                    <img src="{% static 'assets/images/room3.jpeg' %}" alt="">
+                  </a>
+                </div>
+                <div class="blog-meta">
+                  <span class="comments-type">
+                    <i class="fa fa-comment-o"></i>
+                    <a href="#">10 Reviews</a>
+                  </span>
+                </div>
+                <div class="blog-text">
+                  <h4>
+                    <a href="{% url 'hotel-list' %}">Golf Hotel, Kakamega!</a>
+                  </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
+                    <br>
+                     <span>
+                      <a href="{% url 'book-room' %}" class="btn btn-info mt-2">View Details</a>
+                    </span>
+                  </p>
+                </div>
+
+              </div>
+            </div>
+            <!-- End Right Blog-->
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Section -->
+
+    <!-- ======= Suscribe Section ======= -->
+    <!-- End Suscribe Section -->
+
+    <!-- ======= Contact Section ======= -->
+   <!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2>TUNDACOM</h2>
+                </div>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                <div class="footer-icons">
+                  <ul>
+                    <li>
+                      <a href="#"><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>information</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                </p>
+                <div class="footer-contacts">
+                  <p><span>Tel:</span> +123 456 789</p>
+                  <p><span>Email:</span> contact@example.com</p>
+                  <p><span>Working Hours:</span> 9am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Instagram</h4>
+                <div class="flicker-img">
+                  <a href="#"><img src="assets/img/portfolio/1.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/2.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/3.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/4.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/5.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/6.jpg" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>Tundacom</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              Designed by <a href="#">Tundacom</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<header id="header" class="fixed-top d-flex align-items-center" style="background-color:black; height:150px;">
+  <meta charset="utf-8">
+  <title>Hotels</title>
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+
+    <div class="container d-flex justify-content-between">
+
+
+        <!-- <h1><a href="/">TUNDACOM</a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="/"><img src="../../static/assets/img/tundacom.jpeg" style="height:120px;" alt="" class=""></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li class="dropdown"><a href="#" style="color:#daa520; font-size:16px;"><span>CATEGORIES</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'property' %}" style="color:#daa520; font-size:16px;">PROPERTY</a></li>
+              <li><a href="{% url 'houses-list' %}" style="color:#daa520; font-size:16px;">VACANT HOUSES</a></li>
+              <li><a href="{% url 'swap-list' %}" style="color:#daa520; font-size:16px;">SWAP HOUSES</a></li>
+              <li><a href="{% url 'hotel-list' %}" style="color:#daa520; font-size:16px;">HOTELS</a></li>
+            </ul>
+          </li>
+  {% if user.is_authenticated %}
+          <li class="dropdown"><a href="#"><span style="color:#daa520; font-size:16px;">ACCOUNT</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% if user.is_superuser %}
+              <li><a href="{% url 'dashboard' %}" style="color:#daa520; font-size:16px;">Dashboard</a></li>
+
+              {% else %}
+               <li><a href="{% url 'dashboard' %}" style="color:#daa520; font-size:16px;">Profile</a></li>
+              {% endif %}
+              <li><a class="nav-link scrollto" href="{% url 'logout' %}" style="color:#daa520; font-size:16px;">Logout</a></li>
+            </ul>
+          </li>
+  {% if user.member.id %}
+
+  {% else %}
+          <li><a href="{% url 'new-member' %}" style="color:#daa520; font-size:16px;">CREATE PROFILE</a></li>
+  {% endif %}
+
+  {% else %}
+          <li class="dropdown"><a href="#"><span style="color:#daa520; font-size:16px;">ACCOUNT</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'login' %}" style="color:#daa520; font-size:16px;">Login</a></li>
+              <li><a href="{% url 'register' %}" style="color:#daa520; font-size:16px;">Register</a></li>
+
+            </ul>
+          </li>
+  {% endif %}
+          <li><a class="nav-link scrollto" href="{% url 'about' %}" style="color:#daa520; font-size:16px;">ABOUT</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'contact' %}" style="color:#daa520; font-size:16px;">CONTACT</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+
+</header>
+  <body>
+<br><br><br><br><br><br><br><br>
+    {% block content %}
+    <main id="main">
+        <div id="blog" class="blog-area">
+          <div class="blog-inner area-padding">
+            <div class="blog-overly"></div>
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <div class="section-headline text-center">
+                    <h4>Hotel Rooms/Hotels</h4>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                  <form class="" action="{% url 'hotel-list' %}" method="GET">
+                    <input type="text" class="form-control" name="q" placeholder="Search Hotel">
+                  </form>
+                </div>
+    {% if user.is_authenticated and user.member.id %}
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                  <a href="{% url 'new-hotel' %}" class="btn btn-primary">New Hotel</a>
+                </div>
+    {% endif %}
+              </div>
+              <div class="row">
+                <!-- Start Left Blog -->
+      {% for hotel in hotels %}
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <div class="single-blog">
+                    <div class="single-blog-img">
+                      <a href="{% url 'hotel-details' hotel.id %}">
+                        <img src="{{hotel.image_1.url}}" alt="" style='height:280px; width:260px;'>
+                      </a>
+                    </div>
+                        <i class="fa fa-comment-o"></i>
+                        <p>PRICE: KES. {{hotel.price}}</p>
+                      <h6>
+                        <a href="{% url 'hotel-details' hotel.id %}">{{hotel.name}}, {{hotel.town}}!</a>
+                      </h6>
+                      
+                      <p>
+                          Total Rooms: {{hotel.rooms_count}}
+                          Available Rooms: {{hotel.available_rooms}}
+                      </p>
+                      <span>
+                        <a href="{% url 'hotel-details' hotel.id %}" class="btn btn-info mt-2">View Details</a>
+                        <a href="{% url 'delete-hotel' hotel.pk %}" class="btn btn-danger mt-2">Delete Hotel</a>
+                        <a href="{% url 'update-hotel' hotel.pk %}" class="btn btn-primary mt-2">Update Hotel</a>
+                      </span>
+                    <br><br><br>
+                  </div>
+                  <!-- Start single blog -->
+                </div>
+
+    {% endfor %}
+
+                <!-- End Left Blog-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main><!-- End #main -->
+
+      <!-- ======= Footer ======= -->
+      <footer>
+        <div class="footer-area" style="background-color:black">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="footer-content">
+                  <div class="footer-head">
+                    <div class="footer-logo" style="color:#b8860b">
+                      <h2 style="color:#daa520">tundacom</h2>
+                    </div>
+
+                <div class="footer-content">
+                  <div class="footer-head">
+                    <div class="links">
+                      <ul>
+                        <li><a style="color:#daa520; padding-top:100px; marging-top:20em" href="">Terms and Conditions</a></li>
+                        <li><a style="color:#daa520; padding-top:100px; marging-top:20em"href="">Privacy Policy</a></li>
+                      </ul>
+
+                  </div>
+                </div>
+              </div>
+
+                    <div class="footer-icons">
+                      <ul>
+                        <li style="color:#daa520">
+                          <a href="#"><i class="bi bi-facebook"></i></a>
+                        </li>
+                        <li style="color:#daa520">
+                          <a href="#"><i class="bi bi-twitter"></i></a>
+                        </li>
+                        <li style="color:#daa520">
+                          <a href="#"><i class="bi bi-instagram"></i></a>
+                        </li>
+                        <li style="color:#daa520">
+                          <a href="#"><i class="bi bi-linkedin"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end single footer -->
+              <div class="col-md-4">
+                <div class="footer-content">
+                  <div class="footer-head">
+                    <h3 style="color:#daa520">information</h3>
+                    <div class="footer-contacts">
+                      <p style="color:#daa520"><span>Tel:</span> 0717 363 855</p>
+                      <p style="color:#daa520"><span>Email:</span> info@tundacomkenya.co.ke</p>
+                      <p style="color:#daa520"><span>Working Hours:</span> 9am-5pm</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end single footer -->
+              <div class="col-md-4">
+                <div class="footer-content">
+                  <div class="footer-head">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-area-bottom" style="background-color:black">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="copyright text-center">
+                  <p style="color:#daa520">
+                    &copy; Copyright <strong>Tundacom</strong>. All Rights Reserved
+                  </p>
+                </div>
+                <div class="credits" style="color:#daa520">
+                  Designed by <a href="#">Tundacom</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer><!-- End  Footer -->
+
+      {% endblock content %}
+
+  </body>
+</html>

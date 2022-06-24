@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-home"></i><a href="/">Home</a></li>
+          <li><i class="fa fa-laptop"></i>Advertisements</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="table-responsive">
+          <section class="panel">
+            <header class="panel-heading">
+              Adverts List
+            </header>
+            <table class="table ml-3">
+              <thead>
+                <tr>
+                  <th>Owner</th>
+                  <th>Title</th>
+                  <th>Message</th>
+                  <th>Approved</th>
+                  <th colspan="3">Actions</th>                      
+                </tr>
+              </thead>
+              <tbody>
+        {% for advertisement in advertisements %}
+                <tr>
+                  <td>{{advertisement.user.email}}</td>
+                  <td>{{advertisement.title}}</td>
+                  <td>{{advertisement.message}}</td>
+                  <td>{{advertisement.approved}}</td>
+                <td>
+                    <a href="#" class="btn btn-primary">Details!</a>
+                  </td>
+             
+                  <td>
+                    <a href="#" class="btn btn-primary">Approve/Decline</a>
+                  </td>
+
+             <td>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                  </td>
+               
+                </tr>
+      {% endfor %}
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+      </div>
+
+  </section>
+</section>
+
+{% endblock content %}

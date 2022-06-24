@@ -1,0 +1,113 @@
+<header id="header" class="fixed-top d-flex align-items-center" style="background-color:black; height:150px;">
+  <div class="container d-flex justify-content-between">
+
+
+      <!-- <h1><a href="/">TUNDACOM</a></h1> -->
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="index.html"><img src="static/assets/img/tundacom.jpeg" style="height:120px;" alt="" class=""></a>
+
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li class="dropdown"><a href="#" style="color:#daa520; font-size:16px;"><span>CATEGORIES</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'property' %}" style="color:#daa520; font-size:16px;">PROPERTY</a></li>
+            <li><a href="{% url 'houses-list' %}" style="color:#daa520; font-size:16px;">VACANT HOUSES</a></li>
+            <li><a href="{% url 'swap-list' %}" style="color:#daa520; font-size:16px;">SWAP HOUSES</a></li>
+            <li><a href="{% url 'rooms-test' %}" style="color:#daa520; font-size:16px;">HOTELS</a></li>
+          </ul>
+        </li>
+{% if user.is_authenticated %}
+        <li class="dropdown"><a href="#"><span style="color:#daa520; font-size:16px;">ACCOUNT</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            {% if user.is_superuser %}
+            <li><a href="{% url 'dashboard' %}" style="color:#daa520; font-size:16px;">Dashboard</a></li>
+
+            {% else %}
+             <li><a href="{% url 'dashboard' %}" style="color:#daa520; font-size:16px;">Profile</a></li>
+            {% endif %}
+            <li><a class="nav-link scrollto" href="{% url 'logout' %}" style="color:#daa520; font-size:16px;">Logout</a></li>
+          </ul>
+        </li>
+{% if user.member.id %}
+
+{% else %}
+        <li><a href="{% url 'new-member' %}" style="color:#daa520; font-size:16px;">CREATE PROFILE</a></li>
+{% endif %}
+
+{% else %}
+        <li class="dropdown"><a href="#"><span style="color:#daa520; font-size:16px;">ACCOUNT</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'login' %}" style="color:#daa520; font-size:16px;">Login</a></li>
+            <li><a href="{% url 'register' %}" style="color:#daa520; font-size:16px;">Register</a></li>
+
+          </ul>
+        </li>
+{% endif %}
+        <li><a class="nav-link scrollto" href="{% url 'about' %}" style="color:#daa520; font-size:16px;">ABOUT</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'contact' %}" style="color:#daa520; font-size:16px;">CONTACT</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End eader -->
+
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Dropdown
+        </a>
+        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+          <i class="fab fa-google-plus-g"></i>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-default"
+          aria-labelledby="navbarDropdownMenuLink-333">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
