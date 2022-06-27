@@ -1,3 +1,4 @@
+from itertools import chain
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from hotel.forms import HotelForm, BookingForm, RatingForm, UpdateHotelForm
@@ -120,4 +121,3 @@ class UpdateHotel(UpdateView):
 #         hotel = get_object_or_404(Hotel, pk=pk)
 # 	hotel.delete()
 # 	return redirect("hotel-list")
-  

@@ -29,4 +29,6 @@ urlpatterns = [
 	path("new-property/", NewProperty.as_view(), name="new-property"),
 	path("new-vacant-house/", NewHouse.as_view(), name="new-vacant-house"),
 	path("new-swap-house/", NewSwapHouse.as_view(), name="new-swap-house"),
+
+	path("main_search/",views.main_search, name="main_search"), 
 ]

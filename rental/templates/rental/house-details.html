@@ -67,10 +67,12 @@
             </ul>
           </li>
   {% endif %}
-          <li><a class="nav-link scrollto" href="{% url 'about' %}" style="color:#daa520; font-size:16px;">ABOUT</a></li>
+             <li><a class="nav-link scrollto" href="{% url 'about' %}" style="color:#daa520; font-size:16px;">ABOUT</a></li>
           <li><a class="nav-link scrollto" href="{% url 'contact' %}" style="color:#daa520; font-size:16px;">CONTACT</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        </ul> <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>

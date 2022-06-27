@@ -6,6 +6,22 @@ from hotel.models import Hotel
 from django.db.models import Q
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 # Create your views here.
+def main_search(request):
+	q = request.GET.get('q') if request.GET.get('q') != None else ''
+	hotels = Hotel.objects.filter(Q(name__icontains=q) | Q(location__icontains=q) | Q(town__icontains=q))
+	properties = Property.objects.filter(Q(property_name__icontains=q) | Q(location__icontains=q) | Q(town__icontains=q))
+	houses = House.objects.filter(Q(property_name__icontains=q) | Q(location__icontains=q) | Q(town__icontains=q))
+	swap_houses = SwapHouse.objects.filter(Q(property_name__icontains=q) | Q(location__icontains=q) | Q(town__icontains=q))
+
+	context = {
+		"hotels": hotels,
+		"properties": properties,
+		"houses": houses,
+		"swap_houses": swap_houses		
+	}	
+	print(context)
+	return render(request, "index.html", context)
+
 def home(request):
 	hotels = Hotel.objects.all()[:4]
 	properties = Property.objects.all()[:4]
@@ -24,7 +40,7 @@ def dashboard(request):
 
 def property(request):
 	q = request.GET.get('q') if request.GET.get('q') != None else ''
-	properties = Property.objects.filter(Q(property_name__icontains=q) | Q(location__icontains=q) | Q(price__icontains=q))
+	properties = Property.objects.filter(Q(property_name__icontains=q) | Q(location__icontains=q) | Q(price__icontains=q)|Q(town__icontains=q))
 	#properties = Property.objects.all()
 	context = {
 		"properties": properties

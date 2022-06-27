@@ -1,10 +1,13 @@
+{% load static %}
 <header id="header" class="fixed-top d-flex align-items-center" style="background-color:black; height:150px;">
   <div class="container d-flex justify-content-between">
 
 
       <!-- <h1><a href="/">TUNDACOM</a></h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="index.html"><img src="static/assets/img/tundacom.jpeg" style="height:120px;" alt="" class=""></a>
+      <img src="{% static 'assets/img/tundacom.jpeg' %}"  style="height:120px;" alt="Logo">
+
+      <!-- <a href="index.html"><img src="static/assets/img/tundacom.jpeg" style="height:120px;" alt="" class=""></a> -->
 
 
     <nav id="navbar" class="navbar">
@@ -45,8 +48,12 @@
         </li>
 {% endif %}
         <li><a class="nav-link scrollto" href="{% url 'about' %}" style="color:#daa520; font-size:16px;">ABOUT</a></li>
-        <li><a class="nav-link scrollto" href="{% url 'contact' %}" style="color:#daa520; font-size:16px;">CONTACT</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'contact' %}" style="color:#daa520; font-size:16px;">CONTACTS</a></li>
       </ul>
+
+      <form class="orm-inline my-2 my-lg-0" action="{% url 'main_search' %}" method="GET">
+        <input type="text" class="form-control" name="q" placeholder="Looking for ...">
+      </form>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
 

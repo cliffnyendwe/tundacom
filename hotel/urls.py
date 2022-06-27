@@ -14,4 +14,5 @@ urlpatterns = [
   path("booking-test/", views.booking_test, name="booking-test"),
   path("update/<int:pk>/hotel/", UpdateHotel.as_view(), name="update-hotel"),
   path("delete/<int:pk>/hotel/", views.delete_hotel, name="delete-hotel"),
+  
 ]

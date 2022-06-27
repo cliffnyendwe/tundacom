@@ -5,6 +5,8 @@ from rental.models import Member
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 # Create your models here.
+from django.db.models import Q
+
 HOTEL_CATEGORY = (
 	("5_star", "5_star"),
 	("4_star", "4_star"),
@@ -117,7 +119,6 @@ class Hotel(models.Model):
 	image_8 = models.ImageField(upload_to="hotel", default='image', blank=True, null=True)
 	image_9 = models.ImageField(upload_to="hotel", default='image', blank=True, null=True)
 	image_10 = models.ImageField(upload_to="hotel", default='image', blank=True, null=True)
-
 	def __str__(self):
 		return self.name
 
